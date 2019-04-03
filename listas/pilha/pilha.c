@@ -253,4 +253,33 @@ int somaPilha(Pilha p)
 // 11
 int palindromePilha(Pilha p)
 {
+  if(!vaziaPilha(p)) 
+  {
+    Pilha copia = inicPilha();
+
+    copia = copiarPilha(p);
+    invPilha(copia);
+
+    while(!vaziaPilha(p)) 
+    {
+      if(infoPilha(p) == infoPilha(copia)) 
+      {
+        pop(p);
+        pop(copia);
+      }
+      else
+      {
+        return 0;
+      }
+    }
+
+    if(!vaziaPilha(p) && !vaziaPilha(copia)) 
+    {
+      return 1;
+    }
+
+    return 1;
+  }
+
+  return 0;
 }
