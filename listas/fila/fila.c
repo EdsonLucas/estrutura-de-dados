@@ -220,3 +220,133 @@ void invFila(Fila f)
 
   destruirPilha(p);
 }
+
+// 5
+int existeElemento(Fila f, TipoF elem) 
+{
+  Fila copia = inicFila();
+  copia = copiarFila(f);
+
+  while(!vaziaFila(copia)) {
+    if(infoFila(elimFila(copia)) == elem) {
+      destruirFila(copia);
+      return 1;
+    }
+  }
+  
+  destruirFila(copia);
+  return 0;
+}
+
+// 6
+int iguaisFilas(Fila f1, Fila f2) 
+{
+  if(longFila(f1) == longFila(f2)) {
+    Fila copia1 = inicFila();
+    copia1 = copiarFila(f1);
+
+    Fila copia2 = inicFila();
+    copia2 = copiarFila(f2);
+
+    while(!vaziaFila(copia1)) {
+      if(infoFila(elimFila(copia1)) != infoFila(elimFila(copia2)) {
+        destruirFila(copia1);
+        destruirFila(copia2);
+        return 0;
+      }
+    }
+    
+    destruirFila(copia1);
+    destruirFila(copia2);
+    return 1;
+  }
+  
+  return 0;
+}
+
+// 7
+void adicFilaPos(Fila f, TipoF elem, int pos)
+{
+  if(pos < 0 || pos > longFila(f) + 1) {
+    printf("Posicao invalida\n");
+    break;
+  }
+
+  if(longFila(f) < pos) {
+    adicFila(f, elem);
+    break;
+  }
+
+  Fila copia = inicFila();
+  copia = copiarFila(f);
+  int cont = 0;
+
+  while(!vaziaFila(copia))
+  {
+    if(cont == pos)
+    {
+      adicFila(f, elem);
+    } 
+    else 
+    {
+      adicFila(f, infoFila(elimFila(copia)));
+      cont++;
+    }
+  }
+
+  while(!vaziaFila(copia))
+  {
+    adicFila(f, infoFila(elimFila(copia)));
+  }
+
+  destruirFila(copia);
+}
+
+// 8
+void elimElemento(Fila f, TipoF elem) 
+{
+  if(vaziaFila(f)) {
+    printf("A fila esta vazia.");
+    break;
+  }
+
+  Fila copia = inicFila();
+
+  while(!vaziaFila(f)) {
+    if(infoFila(f) != elem) {
+      adicFila(copia, elimFila(f));
+    }
+    else {
+      elimFila(f);
+    }
+  }
+
+  f = copiarFila(copia);
+  destruirFila(copia);
+}
+
+// 9
+void partirFila(Fila f, Fila f1, Fila f2, TipoF elem) {
+  while(!vaziaFila(f)) {
+    if(infoFila(f) > elem) {
+      adicFila(f2, elimFila(f));
+    } else {
+      adicFila(f1, elimFila(f));
+    }
+  }
+}
+
+// 10 
+primeiroDaFila( Fila f, TipoF elem) 
+{
+  Fila copia = inicFila();
+  adicFila(copia, elem);
+  copia = copiarFila(f);
+  
+  while(!vaziaFila(f)) {
+    elimFila(f);
+  }
+
+  f = copiarFila(copia);
+  destruirFila(copia);  
+}
