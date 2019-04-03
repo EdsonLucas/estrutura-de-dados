@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #define MAX 100
 
+#include "../lista/funcoes.h"
+
 typedef int TipoL;
 
 typedef struct ListaNo

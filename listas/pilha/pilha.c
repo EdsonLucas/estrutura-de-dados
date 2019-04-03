@@ -135,3 +135,122 @@ void invPilha(Pilha p)
     elimLista(lst);
   }
 }
+
+// 4
+int iguaisPilhas(Pilha p1, Pilha p2)
+{
+  if (!vaziaPilha(p1) && !vaziaPilha(p2))
+  {
+    Pilha p1_copia = inicPilha();
+    Pilha p2_copia = inicPilha();
+
+    p1_copia = copiarPilha(p1);
+    p2_copia = copiarPilha(p2);
+
+    while (!vaziaPilha(p1_copia))
+    {
+      if (infoPilha(p1_copia) == infoPilha(p2_copia))
+      {
+        pop(p1_copia);
+        pop(p2_copia);
+      }
+      else
+      {
+        return 0;
+      }
+    }
+
+    if (!vaziaPilha(p1_copia) || !vaziaPilha(p2_copia))
+    {
+      return 0;
+    }
+
+    return 1;
+  }
+
+  return 1;
+}
+
+// 5
+int avaliarExpressao(Lista lstExp)
+{
+}
+
+//6
+void imprimePilha(Pilha p)
+{
+  Pilha copia = inicPilha();
+  copia = copiarPilha(p);
+  while (!vaziaPilha(copia))
+  {
+    printf("%i\n", pop(copia));
+  }
+}
+
+//7
+void fundoPilha(Pilha p, TipoP elem)
+{
+  Pilha copia = inicPilha();
+  copia = copiarPilha(p);
+
+  invPilha(copia);
+  push(copia, elem);
+
+  while (!vaziaPilha(p))
+  {
+    pop(p);
+  }
+
+  p = copiarPilha(copia);
+}
+
+// 8
+int longPilha(Pilha p)
+{
+  Pilha copia = inicPilha();
+  copia = copiarPilha(p);
+
+  int cont = 0;
+
+  while (!vaziaPilha(copia))
+  {
+    pop(copia);
+    cont++;
+  }
+
+  return cont;
+}
+
+// 9
+void elimTodosPilha(Pilha p, TipoP elem)
+{
+  while (!vaziaPilha(p))
+  {
+    if (infoPilha(p) == elem)
+    {
+      pop(p);
+    }
+  }
+}
+
+// 10
+int somaPilha(Pilha p)
+{
+  Pilha copia = inicPilha();
+  copia = copiarPilha(p);
+
+  int cont = 0;
+
+  while (!vaziaPilha(copia))
+  {
+    cont += infoPilha(copia);
+    pop(copia);
+  }
+
+  return cont;
+}
+
+// 11
+int palindromePilha(Pilha p)
+{
+}
