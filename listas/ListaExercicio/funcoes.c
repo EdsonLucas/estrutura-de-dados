@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #ifndef FUNCOES_C_INCLUDED
 #define FUNCOES_C_INCLUDED
 #include "funcoes.h"
 
-/// FunÁıes Lista
+/// Fun√ß√µes Lista
 
 Lista inicLista()
 {
     Lista lst;
-    // Aloca espaÁo na memÛria atribuindo todos os valores a zero
+    // Aloca espa√ßo na mem√≥ria atribuindo todos os valores a zero
     lst = (Lista)malloc(sizeof(struct TLista));
     lst->longitude = 0;
     lst->iterador = NULL;
@@ -26,7 +27,7 @@ void primLista(Lista lst)
 
 void ultLista(Lista lst)
 {
-    // Pıe o iterador no ˙ltimo elemento da lista
+    // P√µe o iterador no √∫ltimo elemento da lista
     lst->iterador = lst->ultimo;
 }
 
@@ -70,7 +71,7 @@ TipoL infoLista(Lista lst)
     if (lst->iterador == NULL)
     {
         printf("\n erro: iterador indefinido \n");
-        return NULL;
+        return (TipoL)NULL;
     }
     else
         return lst->iterador->info;
@@ -92,7 +93,7 @@ void anxLista(Lista lst, TipoL elem)
     else
     {
 
-        //alocar memÛria para o novoNo a ser adicionado
+        //alocar mem√≥ria para o novoNo a ser adicionado
         pListaNo novoNo = (pListaNo)malloc(sizeof(struct ListaNo));
         novoNo->info = elem; // atribuir o elemento a ser armazenado
         novoNo->prox = NULL; // atribuir NULL para deixar o novoNo preparado
@@ -139,7 +140,7 @@ void insLista(Lista lst, TipoL elem)
     else
     {
 
-        //alocar memÛria para o novoNo a ser adicionado
+        //alocar mem√≥ria para o novoNo a ser adicionado
         pListaNo novoNo = (pListaNo)malloc(sizeof(struct ListaNo));
         novoNo->info = elem; // atribuir o elemento a ser armazenado
         novoNo->prox = NULL; // atribuir NULL para deixar o novoNo preparado
@@ -490,7 +491,7 @@ int numOcorrenciasLista( Lista lst, TipoL elem)
         if (infoLista(lst) == elem)
             cont++;
     }
-    for(primLista(lst); lst->iterador != p; segLista(lst));//voltar o iterador para lugar que j· estava
+    for(primLista(lst); lst->iterador != p; segLista(lst));//voltar o iterador para lugar que j√° estava
     return cont;
 }
 // 15
@@ -546,7 +547,7 @@ void eliminarLista( Lista lst, int p1, int p2)
     }
 }
 
-/// FunÁıes de Pilha
+/// Fun√ß√µes de Pilha
 
 Pilha inicPilha()
 {
@@ -579,7 +580,7 @@ TipoP pop(Pilha p)
     if(p->topo == -1)
     {
         printf("\n pilha vazia \n");
-        return NULL;
+        return (TipoP)NULL;
     }
     else
     {
@@ -608,7 +609,7 @@ TipoP infoPilha(Pilha p)
     else
     {
         printf("\n pilha vazia \n");
-        return NULL;
+        return (TipoP)NULL;
     }
 }
 
@@ -816,7 +817,7 @@ int palindromePilha( Pilha p)
     return 0;
 }
 
-/// FunÁıes Fila
+/// Fun√ß√µes Fila
 
 Fila inicFila( void )
 {
@@ -829,7 +830,7 @@ Fila inicFila( void )
 
 void adicFila( Fila f, TipoF elem)
 {
-    // Se a fila n„o est· cheia, È passado o valor 0 como inicial
+    // Se a fila n√£o est√° cheia, √© passado o valor 0 como inicial
     if (f->primeiro == -1)
     {
         f->info[0] = elem;
@@ -837,11 +838,11 @@ void adicFila( Fila f, TipoF elem)
     }
     else if ((f->ultimo + 1) % MAX == f->primeiro)
     {
-        printf("\n Infelizmente a fila j· est· cheia.");
+        printf("\n Infelizmente a fila j√° est√° cheia.");
     }
     else
     {
-        f->ultimo = (f->ultimo + 1) % MAX; // Descobre a nova posiÁ„o do ˙ltimo elemento
+        f->ultimo = (f->ultimo + 1) % MAX; // Descobre a nova posi√ß√£o do √∫ltimo elemento
         f->info[f->ultimo] = elem;
     }
 }
@@ -851,8 +852,8 @@ TipoF elimFila( Fila f)
     TipoF primeiroElem;
     if (f->primeiro == -1)
     {
-        printf("\n A fila est· vazia.");
-        return NULL;
+        printf("\n A fila est√° vazia.");
+        return (TipoF)NULL;
     }
     else if (f->primeiro == f->ultimo)
     {
@@ -873,8 +874,8 @@ TipoF infoFila(Fila f)
 {
     if (f->primeiro == -1)
     {
-        printf("\n A fila est· vazia.");
-        return NULL;
+        printf("\n A fila est√° vazia.");
+        return (TipoF)NULL;
     }
     else
     {
@@ -896,7 +897,7 @@ void printFila(Fila f)
 {
     if (f->primeiro == -1)
     {
-        printf("\n A fila est· vazia.");
+        printf("\n A fila est√° vazia.");
     }
     else
     {
@@ -909,7 +910,7 @@ void printFila(Fila f)
             printf("%d ", elem);
             adicFila(copia, elem);
         }
-        // A fila original est· vazia e a cÛpia est· cheia.
+        // A fila original est√° vazia e a c√≥pia est√° cheia.
 
         printf("\n");
 
@@ -938,7 +939,7 @@ Fila copiarFila( Fila f )
         {
             adicFila(faux, elimFila(f));
         }
-        // Ao sair deste loop a fila f est· vazia e a auxiliar est· cheia
+        // Ao sair deste loop a fila f est√° vazia e a auxiliar est√° cheia
 
         TipoF elem;
 
@@ -948,7 +949,7 @@ Fila copiarFila( Fila f )
             adicFila(f, elem);
             adicFila(copia, elem);
         }
-        // A fila original foi restaurada e a copia da fila est· cheia
+        // A fila original foi restaurada e a copia da fila est√° cheia
 
         destruirFila(faux);
 
@@ -970,7 +971,7 @@ int longFila(Fila f)
         {
             adicFila(faux, elimFila(f));
         }
-        // Ao sair deste loop a fila f est· vazia e a auxiliar est· cheia
+        // Ao sair deste loop a fila f est√° vazia e a auxiliar est√° cheia
 
         int cont;
 
@@ -995,7 +996,7 @@ void concatFilas(Fila f1, Fila f2)
     {
         adicFila(faux, elimFila(f2));
     }
-    // Ao sair deste loop a fila 2 est· vazia e a auxiliar est· cheia
+    // Ao sair deste loop a fila 2 est√° vazia e a auxiliar est√° cheia
 
     TipoF elem;
 
@@ -1153,7 +1154,7 @@ void partirFila( Fila f, Fila f1, Fila f2, TipoF elem)
         }
     }
 }
-// 10
+// 10 refazer
 void primeiroDaFila( Fila f, TipoF elem)
 {
     Fila copia = inicFila();
@@ -1167,6 +1168,93 @@ void primeiroDaFila( Fila f, TipoF elem)
 
     f = copiarFila(copia);
     destruirFila(copia);
+}
+// 11
+void banco()
+{
+    Fila f1 = inicFila();
+    Fila f2 = inicFila();
+    Fila f3 = inicFila();
+    int cliente = 0;
+    int total = 0, cont1 = 0, cont2 = 0, cont3 = 0;
+    int fila;
+    int atendido;
+    while(cliente < 51)
+    {
+        fila = rand() % 3;
+        switch(fila)
+        {
+        case 1:
+            if(total % 3 == 0)
+            {
+                atendido = rand() % 3;
+            }
+            if(cont1 < 10)
+            {
+                adicFila(f1, fila);
+                cont1++;
+                total++;
+                cliente++;
+            }
+            else
+            {
+                printf("Fila 1 est√° cheia.\n");
+            }
+        break;
+        case 2:
+            if(total % 3 == 0)
+            {
+                atendido = rand() % 3;
+            }
+            if(cont2 < 10)
+            {
+                adicFila(f2, fila);
+                cont2++;
+                total++;
+                cliente++;
+            }
+            else
+            {
+                printf("Fila 2 est√° cheia.\n");
+            }
+        break;
+        case 3:
+            if(total % 3 == 0)
+            {
+                atendido = rand() % 3;
+            }
+            if(cont3 < 10)
+            {
+                adicFila(f3, fila);
+                cont3++;
+                total++;
+                cliente++;
+            }
+            else
+            {
+                printf("Fila 3 est√° cheia.\n");
+            }
+        break;
+        }
+        switch(atendido)
+        {
+        case 1:
+            printf("Atendimento fila %i",elimFila(f1));
+            cont1--;
+            total--;
+        break;
+        case 2:
+            printf("Atendimento fila %i",elimFila(f2));
+            cont2--;
+            total--;
+        break;
+        case 3:
+            printf("Atendimento fila %i",elimFila(f3));
+            cont3--;
+            total--;
+        break;
+        }
+    }
 }
 
 #endif // FUNCOES_C_INCLUDED
