@@ -5,12 +5,12 @@
 #define FUNCOES_C_INCLUDED
 #include "funcoes.h"
 
-/// FunÁıes Lista
+/// Fun√ß√µes Lista
 
 Lista inicLista()
 {
     Lista lst;
-    // Aloca espaÁo na memÛria atribuindo todos os valores a zero
+    // Aloca espa√ßo na mem√≥ria atribuindo todos os valores a zero
     lst = (Lista)malloc(sizeof(struct TLista));
     lst->longitude = 0;
     lst->iterador = NULL;
@@ -27,7 +27,7 @@ void primLista(Lista lst)
 
 void ultLista(Lista lst)
 {
-    // Pıe o iterador no ˙ltimo elemento da lista
+    // P√µe o iterador no √∫ltimo elemento da lista
     lst->iterador = lst->ultimo;
 }
 
@@ -93,7 +93,7 @@ void anxLista(Lista lst, TipoL elem)
     else
     {
 
-        //alocar memÛria para o novoNo a ser adicionado
+        //alocar mem√≥ria para o novoNo a ser adicionado
         pListaNo novoNo = (pListaNo)malloc(sizeof(struct ListaNo));
         novoNo->info = elem; // atribuir o elemento a ser armazenado
         novoNo->prox = NULL; // atribuir NULL para deixar o novoNo preparado
@@ -140,7 +140,7 @@ void insLista(Lista lst, TipoL elem)
     else
     {
 
-        //alocar memÛria para o novoNo a ser adicionado
+        //alocar mem√≥ria para o novoNo a ser adicionado
         pListaNo novoNo = (pListaNo)malloc(sizeof(struct ListaNo));
         novoNo->info = elem; // atribuir o elemento a ser armazenado
         novoNo->prox = NULL; // atribuir NULL para deixar o novoNo preparado
@@ -348,27 +348,26 @@ int contidaLista(Lista lst1, Lista lst2)
 // 5
 int ordenadaLista(Lista lst)
 {
-    if(longLista(lst) != 0)
+    if (longLista(lst) != 0)
     {
-        Lista aux = inicLista();
-        for(primLista(lst); !fimLista(lst); segLista(lst))
+        Lista copia = inicLista();
+        for (primLista(lst); !fimLista(lst); segLista(lst))
         {
-            adicLista(aux, infoLista(lst));
+            adicLista(copia, infoLista(lst));
         }
-        primLista(aux);
-        for(primLista(lst); !fimLista(lst); segLista(lst))
+        primLista(copia);
+        segLista(copia);
+
+        for (primLista(lst); !fimLista(copia); segLista(lst))
         {
-            if(infoLista(lst) >=  infoLista(aux))
+            if (infoLista(lst) > infoLista(copia))
             {
-                segLista(aux);
-            }
-            else
-            {
-                free(aux);
                 return 0;
             }
+            segLista(copia);
         }
-        free(aux);
+        free(copia);
+        return 1;
     }
     return 1;
 }
@@ -491,7 +490,7 @@ int numOcorrenciasLista( Lista lst, TipoL elem)
         if (infoLista(lst) == elem)
             cont++;
     }
-    for(primLista(lst); lst->iterador != p; segLista(lst));//voltar o iterador para lugar que j· estava
+    for(primLista(lst); lst->iterador != p; segLista(lst));//voltar o iterador para lugar que j√° estava
     return cont;
 }
 // 15
@@ -547,7 +546,7 @@ void eliminarLista( Lista lst, int p1, int p2)
     }
 }
 
-/// FunÁıes de Pilha
+/// Fun√ß√µes de Pilha
 
 Pilha inicPilha()
 {
@@ -817,7 +816,7 @@ int palindromePilha( Pilha p)
     return 0;
 }
 
-/// FunÁıes Fila
+/// Fun√ß√µes Fila
 
 Fila inicFila( void )
 {
@@ -830,7 +829,7 @@ Fila inicFila( void )
 
 void adicFila( Fila f, TipoF elem)
 {
-    // Se a fila n„o est· cheia, È passado o valor 0 como inicial
+    // Se a fila n√£o est√° cheia, √© passado o valor 0 como inicial
     if (f->primeiro == -1)
     {
         f->info[0] = elem;
@@ -839,11 +838,11 @@ void adicFila( Fila f, TipoF elem)
     }
     else if ((f->ultimo + 1) % MAX == f->primeiro)
     {
-        printf("\n Infelizmente a fila j· est· cheia.");
+        printf("\n Infelizmente a fila j√° est√° cheia.");
     }
     else
     {
-        f->ultimo = (f->ultimo + 1) % MAX; // Descobre a nova posiÁ„o do ˙ltimo elemento
+        f->ultimo = (f->ultimo + 1) % MAX; // Descobre a nova posi√ß√£o do √∫ltimo elemento
         f->info[f->ultimo] = elem;
     }
 }
@@ -853,7 +852,7 @@ TipoF elimFila( Fila f)
     TipoF primeiroElem;
     if (f->primeiro == -1)
     {
-        printf("\n A fila est· vazia.");
+        printf("\n A fila est√° vazia.");
         return (TipoF)NULL;
     }
     else if (f->primeiro == f->ultimo)
@@ -875,7 +874,7 @@ TipoF infoFila(Fila f)
 {
     if (f->primeiro == -1)
     {
-        printf("\n A fila est· vazia.");
+        printf("\n A fila est√° vazia.");
         return (TipoF)NULL;
     }
     else
@@ -898,7 +897,7 @@ void printFila(Fila f)
 {
     if (f->primeiro == -1)
     {
-        printf("\n A fila est· vazia.");
+        printf("\n A fila est√° vazia.");
     }
     else
     {
@@ -911,7 +910,7 @@ void printFila(Fila f)
             printf("%d ", elem);
             adicFila(copia, elem);
         }
-        // A fila original est· vazia e a cÛpia est· cheia.
+        // A fila original est√° vazia e a c√≥pia est√° cheia.
 
         printf("\n");
 
@@ -940,7 +939,7 @@ Fila copiarFila( Fila f )
         {
             adicFila(faux, elimFila(f));
         }
-        // Ao sair deste loop a fila f est· vazia e a auxiliar est· cheia
+        // Ao sair deste loop a fila f est√° vazia e a auxiliar est√° cheia
 
         TipoF elem;
 
@@ -950,7 +949,7 @@ Fila copiarFila( Fila f )
             adicFila(f, elem);
             adicFila(copia, elem);
         }
-        // A fila original foi restaurada e a copia da fila est· cheia
+        // A fila original foi restaurada e a copia da fila est√° cheia
 
         destruirFila(faux);
 
@@ -972,7 +971,7 @@ int longFila(Fila f)
         {
             adicFila(faux, elimFila(f));
         }
-        // Ao sair deste loop a fila f est· vazia e a auxiliar est· cheia
+        // Ao sair deste loop a fila f est√° vazia e a auxiliar est√° cheia
 
         int cont;
 
@@ -997,7 +996,7 @@ void concatFilas(Fila f1, Fila f2)
     {
         adicFila(faux, elimFila(f2));
     }
-    // Ao sair deste loop a fila 2 est· vazia e a auxiliar est· cheia
+    // Ao sair deste loop a fila 2 est√° vazia e a auxiliar est√° cheia
 
     TipoF elem;
 
