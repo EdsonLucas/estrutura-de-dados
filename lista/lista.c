@@ -348,25 +348,24 @@ int ordenadaLista(Lista lst)
 {
     if (longLista(lst) != 0)
     {
-        Lista aux = inicLista();
+        Lista copia = inicLista();
         for (primLista(lst); !fimLista(lst); segLista(lst))
         {
-            adicLista(aux, infoLista(lst));
+            adicLista(copia, infoLista(lst));
         }
-        primLista(aux);
-        for (primLista(lst); !fimLista(lst); segLista(lst))
+        primLista(copia);
+        segLista(copia);
+
+        for (primLista(lst); !fimLista(copia); segLista(lst))
         {
-            if (infoLista(lst) >= infoLista(aux))
+            if (infoLista(lst) > infoLista(copia))
             {
-                segLista(aux);
-            }
-            else
-            {
-                free(aux);
                 return 0;
             }
+            segLista(copia);
         }
-        free(aux);
+        free(copia);
+        return 1;
     }
     return 1;
 }
