@@ -545,6 +545,44 @@ void eliminarLista( Lista lst, int p1, int p2)
         printf("Erro: Posicao nao existe.\n");
     }
 }
+// 18
+void ordenarLista(Lista lst)
+{
+     Pilha inverter = inicPilha();
+     Lista count = inicLista();
+     Lista ent = inicLista();
+     TipoL aux = 0;
+     int i;
+     count = copiaLista(lst);
+     ent = copiaLista(lst);
+     simplificarLista(ent);
+        for(primLista(ent);!fimLista(ent);segLista(ent))
+        {
+            TipoL maior = maiorElemento(ent);
+            for(i = 0; i < numOcorrenciasLista(count,aux);i++)
+            {
+                push(inverter,maior);
+            }
+            elimLista(ent);
+
+        }
+        while(!vaziaPilha(inverter))
+            anxLista(lst,pop(inverter));
+
+
+}
+//19
+void diferencaLista(Lista lst1, Lista lst2)
+{
+    for(primLista(lst1);!fimLista(lst1);segLista(lst1))
+    {
+        if(estaNaLista(lst2,infoLista(lst1)))
+        {
+            elimLista(lst1);
+        }
+    }
+}
+
 
 /// Funções de Pilha
 
@@ -709,9 +747,35 @@ int iguaisPilhas( Pilha p1, Pilha p2)
     return 1;
 }
 // 5
-int avaliarExpressao(Lista lstExp)
-{
-    return 0;
+int avaliarExpressao(ListaExp lstExp) {
+    if (lstExp->longitude == 0) {
+        printf("avaliarExpressao: Lista vazia.");
+        return -1;
+    }
+
+    Pilha pAux = inicPilha();
+    int sum = 0;
+
+    for(primListaExp(lstExp); !fimListaExp(lstExp); segListaExp(lstExp)) {
+        if( isdigit(lstExp->iterador->info[0]) ) {
+            push(pAux, atoi(lstExp->iterador->info));
+        } else {
+            if (strcmp(lstExp->iterador->info, "+") == 0) {
+                while(!vaziaPilha(pAux)) {
+                    sum = sum + pop(pAux);
+                }
+            }
+            if (strcmp(lstExp->iterador->info, "*") == 0) {
+                while(!vaziaPilha(pAux)) {
+                    if (sum == 0) {
+                        sum = 1;
+                    }
+                    sum = sum * pop(pAux);
+                }
+           }
+        }
+    }
+    return sum;
 }
 // 6
 void imprimePilha(Pilha p)
