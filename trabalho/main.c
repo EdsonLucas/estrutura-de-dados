@@ -82,10 +82,21 @@ int readCitiesAndRoadsFromFile(FILE *fCities, FILE *fRoads, ListaSE lstRodovias)
 
 ListaDE rodoviasCidade(ListaSE lstRodovias, char *cidade)
 {
-
     ListaDE rodCortamCidade = inicListaDE();
-
-    // finalizar
+    pListaNoSE rod = lstRodovias->primeiro;
+    pListaNoDE cid;
+    while (rod != NULL)
+    {
+        cid = rod->info.cidades;
+        for (primListaDE(cid); !fimListaDE(cid); segListaDE(cid))
+        {
+            if (strcmp(infoListaDE(cid), cidade) == 0)
+            {
+                insListaDE(rodCortamCidade, rod->info.rodovia);
+            }
+        }
+        rod = rod->prox;
+    }
     return rodCortamCidade;
 }
 
@@ -107,7 +118,7 @@ int main()
         exit(1); // shutdown
     }
 
-    printListaSE(lstRodovias);
+    //printListaSE(lstRodovias);
 
     ListaDE rodCortamCidade = rodoviasCidade(lstRodovias, "RioDeJaneiro");
 
