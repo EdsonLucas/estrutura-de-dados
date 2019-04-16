@@ -1,22 +1,21 @@
-
+#include <stdio.h>
+#include <stdlib.h>
 #ifndef ListaSE_H_INCLUDED
-    #include "listSL.h"
+#include "listSL.h"
 
 #endif
-
 
 ListaSE inicListaSE()
 {
 
     ListaSE lst;
-    lst=(ListaSE) malloc(sizeof(struct TListaSE)); // alocando a struct TListaSE
-    lst->longitude = 0;   // zero elmentos
+    lst = (ListaSE)malloc(sizeof(struct TListaSE)); // alocando a struct TListaSE
+    lst->longitude = 0;                             // zero elmentos
     lst->iterador = NULL;
     lst->primeiro = NULL;
     lst->ultimo = NULL;
     return lst; // retorna o endereco onde a struct ListaSE foi alocada
 }
-
 
 void primListaSE(ListaSE lst)
 {
@@ -24,20 +23,25 @@ void primListaSE(ListaSE lst)
     lst->iterador = lst->primeiro;
 }
 
-void ultListaSE(ListaSE lst){
+void ultListaSE(ListaSE lst)
+{
     //por o iterador sobre o ultimo No da ListaSE
     lst->iterador = lst->ultimo;
 }
 
-void posListaSE(ListaSE lst, int pos){
+void posListaSE(ListaSE lst, int pos)
+{
 
-    if(lst->longitude > 0 && pos >=1 && pos <= lst->longitude){
+    if (lst->longitude > 0 && pos >= 1 && pos <= lst->longitude)
+    {
 
         int i;
-        for(i=1, lst->iterador = lst->primeiro; i < pos; i++, lst->iterador = lst->iterador->prox)
-        {}
+        for (i = 1, lst->iterador = lst->primeiro; i < pos; i++, lst->iterador = lst->iterador->prox)
+        {
+        }
     }
-    else{
+    else
+    {
         lst->iterador = NULL; // iterador indefinido
     }
 }
@@ -46,13 +50,12 @@ int fimListaSE(ListaSE lst)
 {
 
     return (lst->iterador == NULL);
-
 }
 
 void segListaSE(ListaSE lst)
 {
 
-    if(lst->iterador == NULL)
+    if (lst->iterador == NULL)
     {
         printf("\n erro: iterador indefindio \n");
     }
@@ -64,10 +67,13 @@ void segListaSE(ListaSE lst)
 
 InfoRodovia infoListaSE(ListaSE lst)
 {
-    if(lst->iterador == NULL)
+    if (lst->iterador == NULL)
     {
         printf("\n erro: iterador indefinido \n");
-        //return NULL;
+        InfoRodovia info;
+        info.cidades = NULL;
+        info.rodovia[0] = '\0';
+        return info;
     }
     else
         return lst->iterador->info;
@@ -78,26 +84,24 @@ int longListaSE(ListaSE lst)
     return lst->longitude;
 }
 
-
 //3 casos: ListaSE vazia, iterador sobre o ultimo elemento, iterador sobre um elemento intermediario
-void anxListaSE( ListaSE lst, InfoRodovia elem )
+void anxListaSE(ListaSE lst, InfoRodovia elem)
 {
 
     //tratamento de erro
-    if(lst->iterador == NULL && lst->longitude > 0)
+    if (lst->iterador == NULL && lst->longitude > 0)
     {
         printf("\n erro: iterador indefinido e ListaSE cheia \n");
-
     }
     else
     {
 
         //alocar memória para o novoNo a ser adicionado
-        pListaNoSE novoNo = ( pListaNoSE )malloc( sizeof( struct ListaNoSE ) );
+        pListaNoSE novoNo = (pListaNoSE)malloc(sizeof(struct ListaNoSE));
         novoNo->info = elem; // atribuir o elemento a ser armazenado
-        novoNo->prox= NULL;  // atribuir NULL para deixar o novoNo preparado
+        novoNo->prox = NULL; // atribuir NULL para deixar o novoNo preparado
 
-        if (lst->longitude == 0)  // ListaSE vazia
+        if (lst->longitude == 0) // ListaSE vazia
         {
             //apontar para o novoNo
             lst->primeiro = novoNo;
@@ -105,7 +109,7 @@ void anxListaSE( ListaSE lst, InfoRodovia elem )
             lst->iterador = novoNo;
             lst->longitude++;
         }
-        else if (lst->iterador == lst->ultimo )  // iterador sobre o ultimo elemento
+        else if (lst->iterador == lst->ultimo) // iterador sobre o ultimo elemento
         {
             //por no campo prox do ultimo no o endereco do novoNo
             lst->iterador->prox = novoNo;
@@ -117,7 +121,7 @@ void anxListaSE( ListaSE lst, InfoRodovia elem )
             //incrementar a quantidade de nos
             lst->longitude++;
         }
-        else  //iterador sobre um noh intermediario
+        else //iterador sobre um noh intermediario
         {
             // o prox do novoNo aponta para o proximo Noh depois do iterador
             // fazer o prox do iterador apontar para o novoNo
@@ -126,31 +130,26 @@ void anxListaSE( ListaSE lst, InfoRodovia elem )
             lst->iterador = novoNo;
             lst->longitude++;
         }
-
     }
-
 }
 
-
-
 //3 casos: ListaSE vazia, iterador sobre o primeiro elemento, iterador sobre qualquer outro elemento
-void insListaSE( ListaSE lst, InfoRodovia elem )
+void insListaSE(ListaSE lst, InfoRodovia elem)
 {
 
-    if(lst->iterador == NULL && lst->longitude > 0)
+    if (lst->iterador == NULL && lst->longitude > 0)
     {
         printf("\n erro: iterador indefinido e ListaSE cheia \n");
-
     }
     else
     {
 
         //alocar memória para o novoNo a ser adicionado
-        pListaNoSE novoNo = ( pListaNoSE )malloc( sizeof( struct ListaNoSE ) );
+        pListaNoSE novoNo = (pListaNoSE)malloc(sizeof(struct ListaNoSE));
         novoNo->info = elem; // atribuir o elemento a ser armazenado
-        novoNo->prox= NULL;  // atribuir NULL para deixar o novoNo preparado
+        novoNo->prox = NULL; // atribuir NULL para deixar o novoNo preparado
 
-        if (lst->longitude == 0)  // ListaSE vazia
+        if (lst->longitude == 0) // ListaSE vazia
         {
             //apontar para o novoNo
             lst->primeiro = novoNo;
@@ -158,7 +157,7 @@ void insListaSE( ListaSE lst, InfoRodovia elem )
             lst->iterador = novoNo;
             lst->longitude++;
         }
-        else if ( lst->iterador == lst->primeiro)  // iterador sobre o primeiro elemento
+        else if (lst->iterador == lst->primeiro) // iterador sobre o primeiro elemento
         {
             //novoNo->prox = lst->iterador;
             novoNo->prox = lst->primeiro;
@@ -166,13 +165,12 @@ void insListaSE( ListaSE lst, InfoRodovia elem )
             lst->iterador = novoNo;
             lst->longitude++;
         }
-        else  //iterador sobre qualquer outro noh
+        else //iterador sobre qualquer outro noh
         {
             //usar um segundo iterador para percorrer a ListaSE e parar uma posicao antes do iterador
             pListaNoSE p;
-            for(p = lst->primeiro; p->prox != lst->iterador ; p = p->prox )
+            for (p = lst->primeiro; p->prox != lst->iterador; p = p->prox)
             {
-
             }
             //ao sair do for, p esta um noh antes do iterador
             //acertar os ponteiros
@@ -181,22 +179,20 @@ void insListaSE( ListaSE lst, InfoRodovia elem )
             lst->iterador = novoNo;
             lst->longitude++;
         }
-
     }
-
 }
 
-
-void elimListaSE( ListaSE lst )
+void elimListaSE(ListaSE lst)
 {
 
-    if(lst->iterador != NULL)
+    if (lst->iterador != NULL)
     {
 
         pListaNoSE noAserDesalocado;
-        if (lst->iterador == lst->primeiro)  // se o iterador estiver sobre o primeiro elemento
+        if (lst->iterador == lst->primeiro) // se o iterador estiver sobre o primeiro elemento
         {
-            if (lst->longitude == 1){
+            if (lst->longitude == 1)
+            {
 
                 noAserDesalocado = lst->iterador;
                 lst->iterador = NULL;
@@ -204,9 +200,9 @@ void elimListaSE( ListaSE lst )
                 lst->ultimo = NULL;
                 lst->longitude--;
                 free(noAserDesalocado);
-
             }
-            else{
+            else
+            {
 
                 noAserDesalocado = lst->iterador;
                 lst->iterador = lst->iterador->prox;
@@ -216,17 +212,17 @@ void elimListaSE( ListaSE lst )
                 free(noAserDesalocado);
             }
         }
-        else  // iterador esta sobre qualquer outro no que nao o primeiro no
+        else // iterador esta sobre qualquer outro no que nao o primeiro no
         {
             //iterador sobre no intermediario ou o ultimo no
             pListaNoSE p;
-            for(p = lst->primeiro; p->prox != lst->iterador; p = p->prox)
+            for (p = lst->primeiro; p->prox != lst->iterador; p = p->prox)
             {
             }
             noAserDesalocado = lst->iterador;
             p->prox = lst->iterador->prox;
 
-            if( lst->iterador == lst->ultimo) // se o iterador estiver sobre o utlimo no
+            if (lst->iterador == lst->ultimo) // se o iterador estiver sobre o utlimo no
                 lst->ultimo = p;
 
             lst->iterador = lst->iterador->prox;
@@ -240,14 +236,18 @@ void elimListaSE( ListaSE lst )
     }
 }
 
+void printListaDE2(ListaDE lst)
+{
 
-void printListaDE2(ListaDE lst){
-
-    if(longListaDE(lst) == 0){
+    if (longListaDE(lst) == 0)
+    {
         printf("\n listaDE vazia\n");
-    }else{
+    }
+    else
+    {
         printf("\n ListaDE: ");
-        for(primListaDE(lst); !fimListaDE(lst); segListaDE(lst)){
+        for (primListaDE(lst); !fimListaDE(lst); segListaDE(lst))
+        {
 
             TipoLDE elemDE;
             strcpy(elemDE, infoListaDE(lst));
@@ -257,16 +257,21 @@ void printListaDE2(ListaDE lst){
     }
 }
 
-void printListaSE(ListaSE lst){
+void printListaSE(ListaSE lst)
+{
 
-    if(longListaSE(lst) == 0){
+    if (longListaSE(lst) == 0)
+    {
         printf("\n listaSE vazia\n");
-    }else{
+    }
+    else
+    {
         InfoRodovia elem;
-        
-        for(primListaSE(lst); !fimListaSE(lst); segListaSE(lst)){
+
+        for (primListaSE(lst); !fimListaSE(lst); segListaSE(lst))
+        {
             elem = infoListaSE(lst);
-            printf("\n ListaSE - Rodovia: %s \n",  elem.rodovia);
+            printf("\n ListaSE - Rodovia: %s \n", elem.rodovia);
             printListaDE2(elem.cidades);
         }
         printf("\n");
