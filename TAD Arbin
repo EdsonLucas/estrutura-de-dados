@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//codigo de arvore binaria
+
+typedef int TipoA;
+
+typedef struct NoArbin{
+    TipoA info;
+    struct NoArbin *esq, *dir;
+} NoArbin, *Arbin ;
+
+int main()
+{
+    printf("Hello world!\n");
+    return 0;
+}
+
+Arbin inicArbin(){
+    return NULL;
+}
+
+Arbin esqArbin(Arbin a){
+    return a->esq;
+}
+
+Arbin dirArbin(Arbin a){
+    return a->dir;
+}
+
+TipoA raizArbin(Arbin a){
+    return a->info;
+}
+
+int vaziaArbin(Arbin a){
+    if(a == NULL)
+        return 1;
+    return 0;
+}
+
+// arvore binaria de busca ou pesquisa
+// subarvore esquerda ficam os elementos menores que a raiz
+// subarvore direita ficam os elementos maiores que a raiz
+// nao podem ter elementos repetidos
+
+Arbin insereABB(Arbin a, TipoA elem){
+    if(a == NULL){
+        a = (Arbin)malloc(sizeof(NoArbin));
+        a->info = elem;
+        a->esq = NULL;
+        a->dir = NULL;
+        return a;
+    }
+    else if (elem < a->info)
+        return insereABB(a->esq, elem);
+    return insereABB(a->dir, elem);
+}
+
+void visitar(TipoA elem){
+    printf("    %d  \n", elem);
+}
+
+void preOrdemArbin(Arbin a){
+    if(!vaziaArbin(a)){
+        visitar(raizArbin(a));
+        preOrdemArbin(esqArbin(a));
+        preOrdemArbin(dirArbin(a));
+    }
+}
+
+int buscaNaArbin(Arbin a, TipoA elem){
+    if(a == NULL)
+        return 0;
+    if(raizArbin(a) == elem)
+        return 1;
+    return (buscaNaArbin(a->esq, elem) || buscaNaArbin(a->dir, elem));
+}
+
