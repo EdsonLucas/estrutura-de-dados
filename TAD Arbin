@@ -76,3 +76,24 @@ int buscaNaArbin(Arbin a, TipoA elem){
     return (buscaNaArbin(a->esq, elem) || buscaNaArbin(a->dir, elem));
 }
 
+void niveisArbin(Arbin a){
+    Fila f;
+    Arbin arb;
+    if(!vaziaArbin(a)){
+        f = inicFila();
+        adicFila(f, a);
+        while(!vaziaFila(f)){
+            arb = infoFila(f);
+            elimFila(f);
+            if(!vazioArbin(arb)){
+                visitarRaiz(raizArbin(arb));
+                adicFila(f, esqArbin(arb));
+                adicFila(f, dirArbin(arb));
+            }
+        }
+    }
+
+}
+// a quantidade de comparações feitas dependem se a árvore está balanceada ou degenerada
+// se está balanceada = log N (log da altura)
+// se não = N (altura)
