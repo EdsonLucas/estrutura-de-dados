@@ -1,3 +1,18 @@
+/*
+Arbin inicArbin( void ) : cria e retorna uma arvore binaria vazia OK
+Arbin esqArbin( Arbin a): retorna a subarvore esquerda OK
+Pre: a!=arvore vazia
+Pos: esqArbin = subarvore esquerda
+Arbin dirArbin( Arbin a): retorna a subarvore direita OK
+Pre: a!=arvore vazia
+Pos: dirArbin = subarvore direita
+TipoA raizArbin( Arbin a): retorna a raiz OK
+Pre: a!=arvore vazia
+Pos: raizArbin = elem
+void destruirArbin( Arbin a): destrói a arvore binária, retornando toda a memória ocupada.
+
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -97,3 +112,54 @@ void niveisArbin(Arbin a){
 // a quantidade de comparações feitas dependem se a árvore está balanceada ou degenerada
 // se está balanceada = log N (log da altura)
 // se não = N (altura)
+
+int buscaNaABB(Arbin a, TipoA elem){
+    if(a == NULL)
+        return 0;
+    if(raizArbin(a) == elem)
+        return 1;
+    else if (elem < raizArbin(a))
+        return buscaNaABB(a->esq, elem);
+    return buscaNaABB(a->dir, elem);
+}
+
+int pesoArbin(Arbin a){
+    if(a == NULL)
+        return 0;
+    return (1 + pesoArbin(a->esq) + pesoArbin(a->dir));
+}
+
+int numFolhas(Arbin a){
+    if(a == NULL)
+        return 0;
+    else if (!vaziaArbin(a->esq) && !vaziaArbin(a->dir))
+        return (numFolhas(a->esq) + numFolhas(a->dir));
+    return 1;
+}
+
+existeCaminhoABB(Arbin a, TipoA e1, TipoA e2){
+    if(a == NULL)
+        return 0;
+    if (raizArbin(a) == e1)
+        return buscaNaArbin(a, e2);
+    if(e1 < raizArbin(a))
+        return existeCaminhoABB(a->esq, e1, e2);
+    return existeCaminhoABB(a->dir, e1, e2);
+}
+
+int contaNivel(Arbin a, int nivel){
+    if(a == NULL)
+        return 0;
+    if(nivel == 0)
+        return 1;
+    return (contaNivel(a->esq, nivel-1) + contaNivel(a->dir, nivel-1));
+}
+
+int igualArbin(Arbin a, Arbin b){
+    if(vaziaArbin(a) && vaziaArbin(b))
+        return 1;
+    if(raizArbin(a) == raizArbin(a))
+        return (igualArbin(a->esq, b->esq) && igualArbin(a->dir, b->dir));
+    else 
+        return 0; 
+}
