@@ -1,14 +1,8 @@
 /*
 Arbin inicArbin( void ) : cria e retorna uma arvore binaria vazia OK
 Arbin esqArbin( Arbin a): retorna a subarvore esquerda OK
-Pre: a!=arvore vazia
-Pos: esqArbin = subarvore esquerda
 Arbin dirArbin( Arbin a): retorna a subarvore direita OK
-Pre: a!=arvore vazia
-Pos: dirArbin = subarvore direita
 TipoA raizArbin( Arbin a): retorna a raiz OK
-Pre: a!=arvore vazia
-Pos: raizArbin = elem
 void destruirArbin( Arbin a): destrói a arvore binária, retornando toda a memória ocupada.
 
 
@@ -137,7 +131,7 @@ int numFolhas(Arbin a){
     return 1;
 }
 
-existeCaminhoABB(Arbin a, TipoA e1, TipoA e2){
+int existeCaminhoABB(Arbin a, TipoA e1, TipoA e2){
     if(a == NULL)
         return 0;
     if (raizArbin(a) == e1)
@@ -162,4 +156,12 @@ int igualArbin(Arbin a, Arbin b){
         return (igualArbin(a->esq, b->esq) && igualArbin(a->dir, b->dir));
     else 
         return 0; 
+}
+
+int numOcorrencias( Arbin a, TipoA elem){
+    if(a == NULL)
+        return 0;
+    if(raizArbin(a) == elem)
+        return 1;
+    return (numOcorrencias(a->esq, elem) + numOcorrencias(a->dir, elem));
 }
