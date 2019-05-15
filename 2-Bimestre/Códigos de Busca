@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    printf("Hello world!\n");
+    return 0;
+}
+
+int buscaVetorNaoOrdenado(int *vet, int tam, int elem)
+{
+    int i=0, k=-1;
+    while(i<tam && k == -1)
+    {
+        if(vet[i] == elem)
+            k=i;
+        else
+            i++;
+    }
+    return k;
+}
+
+int buscaVetorOrdenado(int *vet, int tam, int elem)
+{
+    int inicio = 0;
+    int fim = tam-1;
+    while(inicio <= fim)
+    {
+        meio = (inicio + fim) / 2;
+        if(elem == vet[meio])
+            return meio;
+        else if(elem < vet[meio])
+            fim = meio - 1;
+        else
+            inicio = meio + 1;
+    }
+    return -1;
+}
+
+int buscaBinariaRecursiva(int *vet, int inicio, int fim, int elem)
+{
+    int meio = (inicio + fim) / 2;
+    if(vet[meio] == elem)
+        return meio;
+    if(inicio > fim)
+        return -1;
+    if(elem < vet[meio])
+        return buscaBinariaRecursiva(vet, inicio, meio-1, elem);
+    return buscaBinariaRecursiva(vet, meio+1, fim, elem);
+}
+
