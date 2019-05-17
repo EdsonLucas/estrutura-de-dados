@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define numEntradas 8
+
+// tabela de hash encadeada
+
+typedef struct _HashEncadeado
+{
+    int chave;
+    struct _Hash *prox;
+} HashEncadeado;
+typedef HashEncadeado* Tabela[numEntradas];
+
+//tabela de hash fechada (tentativa linear)
+typedef struct
+{
+    int chave;
+    char situacao;
+} HashFechado;
+typedef HashFechado Tabela[numEntradas];
