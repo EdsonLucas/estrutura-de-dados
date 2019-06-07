@@ -1,5 +1,7 @@
 
 
+
+
 Arbin inicArbin(){
     return NULL;
 }
@@ -106,7 +108,17 @@ int semelhantesArbin( Arbin a1, Arbin a2){
     }
 }
 
-int alturaArbin( Arbin a)
+int alturaArbin( Arbin a){
+    int he, hd; //altura da subarvore esq e da subarvore dir
+    if(vaziaArbin(a))
+        return -1;
+    he = alturaArbin(esqArbin(a));
+    hd = alturaArbin(dirArbin(a));
+    if(he > hd)
+        return he + 1;
+    else
+        return hd + 1;
+}
 
 int iguaisArbin(Arbin a, Arbin b){
     if(vaziaArbin(a) && vaziaArbin(b))
